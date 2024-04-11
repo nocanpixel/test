@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../app/utils/keepTrying.ts"],
+  "sourcesContent": ["// REMIX HMR BEGIN\nimport * as __hmr__ from \"remix:hmr\";\nif (import.meta) {\nimport.meta.hot = __hmr__.createHotContext(\n//@ts-expect-error\n\"app/utils/keepTrying.ts\"\n);\nimport.meta.hot.lastModified = \"1712808153535.0098\";\n}\n// REMIX HMR END\n\nexport default function keepTrying<T>(fn: () => Promise<T>) {\n\tlet keepTrying = true\n\n\tconst execute = (retryTime = 1000) => {\n\t\tfn().catch((error) => {\n\t\t\tconsole.debug(error)\n\t\t\tsetTimeout(() => {\n\t\t\t\tif (keepTrying) {\n\t\t\t\t\texecute(retryTime * 1.5)\n\t\t\t\t}\n\t\t\t}, retryTime)\n\t\t})\n\t}\n\texecute()\n\n\treturn () => {\n\t\tkeepTrying = false\n\t}\n}\n"],
+  "mappings": ";;;;;AAEA,IAAI,aAAa;AACjB,cAAY,MAAc;AAAA;AAAA,IAE1B;AAAA,EACA;AACA,cAAY,IAAI,eAAe;AAC/B;AAGe,SAAR,WAA+B,IAAsB;AAC3D,MAAIA,cAAa;AAEjB,QAAM,UAAU,CAAC,YAAY,QAAS;AACrC,OAAG,EAAE,MAAM,CAAC,UAAU;AACrB,cAAQ,MAAM,KAAK;AACnB,iBAAW,MAAM;AAChB,YAAIA,aAAY;AACf,kBAAQ,YAAY,GAAG;AAAA,QACxB;AAAA,MACD,GAAG,SAAS;AAAA,IACb,CAAC;AAAA,EACF;AACA,UAAQ;AAER,SAAO,MAAM;AACZ,IAAAA,cAAa;AAAA,EACd;AACD;",
+  "names": ["keepTrying"]
+}
